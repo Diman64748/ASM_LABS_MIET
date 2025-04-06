@@ -45,7 +45,7 @@ int main(){
     char str[] =  "0123456789abcdef";
     viewPointer(p);
     printPointer(p);
-    //Вторая штука
+    //Вторая штукаg ggg
 
     viewPointer(str);
     printPointer(str);
