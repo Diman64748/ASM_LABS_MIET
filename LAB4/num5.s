@@ -5,13 +5,8 @@
 	.text
 	.globl	main
 main:
-	.cfi_startproc
-	endbr64
 	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
 	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
 	subq	$48, %rsp
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
@@ -28,6 +23,8 @@ main:
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	__isoc99_scanf@PLT
+
+
 	movsd	-16(%rbp), %xmm0
 	movss	-28(%rbp), %xmm1
 	pxor	%xmm2, %xmm2
@@ -36,7 +33,6 @@ main:
 	movq	-24(%rbp), %rcx
 	movl	-32(%rbp), %edx
 	movzwl	-34(%rbp), %eax
-	cwtl
 	movapd	%xmm0, %xmm1
 	movq	%rsi, %xmm0
 	movl	%eax, %esi
@@ -44,10 +40,11 @@ main:
 	movq	%rax, %rdi
 	movl	$2, %eax
 	call	printf@PLT
+
+
 	movl	$0, %eax
 	movq	-8(%rbp), %rdx
 	subq	%fs:40, %rdx
 	leave
-	.cfi_def_cfa 7, 8
+
 	ret
-	.cfi_endproc

@@ -1,13 +1,9 @@
 	.text
 	.globl	main
 main:
-	.cfi_startproc
-	endbr64
 	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
 	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
+
 	subq	$32, %rsp
 	movl	$1, -32(%rbp)
 	movl	$2, -28(%rbp)
@@ -30,9 +26,8 @@ main:
 	movl	%eax, %edi
 	call	func
 	addq	$16, %rsp
-	movl	$0, %eax
+
 	leave
-	.cfi_def_cfa 7, 8
+
 	ret
-	.cfi_endproc
 

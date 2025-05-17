@@ -5,10 +5,8 @@
 	.globl	main
 	.text
 main:
-	.cfi_startproc
 	endbr64
 	subq	$56, %rsp
-	.cfi_def_cfa_offset 64
 	leaq	.LC0(%rip), %rdi
 	movq	%fs:40, %rax
 	movq	%rax, 40(%rsp)
@@ -19,6 +17,8 @@ main:
 	leaq	20(%rsp), %r8
 	leaq	32(%rsp), %r9
 	call	__isoc99_scanf@PLT
+
+	
 	movswl	14(%rsp), %edx
 	movsd	32(%rsp), %xmm1
 	pxor	%xmm0, %xmm0
@@ -29,12 +29,9 @@ main:
 	movl	$2, %eax
 	cvtss2sd	20(%rsp), %xmm0
 	call	__printf_chk@PLT
+
 	movq	40(%rsp), %rax
 	subq	%fs:40, %rax
-	jne	.L5
 	xorl	%eax, %eax
 	addq	$56, %rsp
-	.cfi_remember_state
-	.cfi_def_cfa_offset 8
 	ret
-	.cfi_endproc
